@@ -9,11 +9,6 @@ module.exports = {
         background: "#F9F9F9",
         text: "#333",
       },
-      fontFamily: {
-        regular: ["Poppins-Regular"],
-        medium: ["Poppins-Medium"],
-        bold: ["Poppins-Bold"],
-      },
     },
   },
   plugins: [],

@@ -1,4 +1,5 @@
 // app/_layout.tsx  
+import "../global.css";
 import { Stack, Link } from "expo-router";
 import { Pressable } from "react-native";
 import { CartProvider } from "../context/CartContext";
