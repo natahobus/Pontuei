@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, FlatList } from "react-native";
+import { Text, FlatList, StyleSheet } from "react-native";
 import { useLocalSearchParams } from "expo-router";
 import { stores } from "../../data/stores";
 import ProductCard from "../../components/ProductCard";
@@ -12,15 +12,15 @@ export default function StoreScreen() {
   if (!loja) {
     return (
       <ScreenContainer>
-        <Text className="text-base text-text">Loja não encontrada</Text>
+        <Text>Loja não encontrada</Text>
       </ScreenContainer>
     );
   }
 
   return (
     <ScreenContainer>
-      <Text className="text-xl font-bold mb-2">{loja.name}</Text>
-      <Text className="text-base text-gray-500 mb-4">{loja.category}</Text>
+      <Text style={styles.title}>{loja.name}</Text>
+      <Text style={styles.category}>{loja.category}</Text>
 
       <FlatList
         data={loja.products}
@@ -31,3 +31,8 @@ export default function StoreScreen() {
     </ScreenContainer>
   );
 }
+
+const styles = StyleSheet.create({
+  title: { fontSize: 22, fontWeight: "bold", marginBottom: 8 },
+  category: { fontSize: 16, color: "gray", marginBottom: 16 },
+});
