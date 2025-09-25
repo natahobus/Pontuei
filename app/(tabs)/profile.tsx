@@ -3,6 +3,7 @@ import {
   SafeAreaView,
   View,
   Text,
+  StyleSheet,
   TouchableOpacity,
   Alert,
 } from "react-native";
@@ -23,51 +24,49 @@ export default function ProfileScreen() {
   ];
 
   return (
-    <SafeAreaView className="flex-1 bg-white p-4">
+    <SafeAreaView style={styles.container}>
       {/* Cabeçalho com ícone de usuário */}
-      <View className="flex-row items-center mb-4 gap-3">
-        <View className="w-11 h-11 rounded-full bg-pink-50 items-center justify-center">
+      <View style={styles.header}>
+        <View style={styles.avatar}>
           <Ionicons name="person-outline" size={28} color="#E94057" />
         </View>
         <View>
-          <Text className="text-lg font-bold text-gray-800">{user.name}</Text>
-          <Text className="text-xs text-gray-500 mt-1">Conta Pontuei</Text>
+          <Text style={styles.name}>{user.name}</Text>
+          <Text style={styles.subtitle}>Conta Pontuei</Text>
         </View>
       </View>
 
       {/* Cartão de pontos */}
-      <View className="bg-white rounded-2xl border border-pink-200 p-4 mb-5 items-center">
-        <Text className="text-3xl font-extrabold text-primary">{user.points}</Text>
-        <Text className="text-gray-700 mb-2">pontos</Text>
+      <View style={styles.pointsCard}>
+        <Text style={styles.pointsValue}>{user.points}</Text>
+        <Text style={styles.pointsLabel}>pontos</Text>
 
-        <View className="flex-row items-center gap-2 bg-primary py-1 px-3 rounded-full mb-3">
+        <View style={styles.tierPill}>
           <Ionicons name="star" size={14} color="#fff" />
-          <Text className="text-white font-bold text-xs">Nível {user.tier}</Text>
+          <Text style={styles.tierText}>Nível {user.tier}</Text>
         </View>
 
         {/* Barra de progresso */}
-        <View className="w-full h-2 bg-gray-100 rounded-full overflow-hidden mt-1">
-          <View className="h-full bg-primary rounded-full" style={{ width: "60%" }} />
+        <View style={styles.progressTrack}>
+          <View style={[styles.progressFill, { width: "60%" }]} />
         </View>
-        <Text className="mt-2 text-xs text-gray-500">
-          Faltam <Text className="font-bold">400 pts</Text> para sua próxima recompensa
+        <Text style={styles.progressHint}>
+          Faltam <Text style={{ fontWeight: "700" }}>400 pts</Text> para sua próxima recompensa
         </Text>
       </View>
 
       {/* Lista: Minha conta */}
-      <Text className="text-sm font-bold text-text mt-2 mb-2">Minha conta</Text>
-      <View className="bg-white rounded-xl border border-gray-200 overflow-hidden mb-3">
+      <Text style={styles.sectionTitle}>Minha conta</Text>
+      <View style={styles.listCard}>
         {conta.map((item, idx) => (
           <TouchableOpacity
             key={item.id}
-            className={`py-4 px-4 flex-row justify-between items-center ${
-              idx < conta.length - 1 ? "border-b border-gray-100" : ""
-            }`}
+            style={[styles.listItem, idx < conta.length - 1 && styles.divider]}
             onPress={item.onPress}
           >
-            <View className="flex-row items-center gap-3">
+            <View style={styles.listLeft}>
               <Ionicons name={item.icon as any} size={22} color="#E94057" />
-              <Text className="text-base text-gray-800">{item.label}</Text>
+              <Text style={styles.listLabel}>{item.label}</Text>
             </View>
             <Ionicons name="chevron-forward" size={20} color="#bbb" />
           </TouchableOpacity>
@@ -75,19 +74,17 @@ export default function ProfileScreen() {
       </View>
 
       {/* Lista: Configurações */}
-      <Text className="text-sm font-bold text-text mt-2 mb-2">Configurações</Text>
-      <View className="bg-white rounded-xl border border-gray-200 overflow-hidden mb-3">
+      <Text style={styles.sectionTitle}>Configurações</Text>
+      <View style={styles.listCard}>
         {ajustes.map((item, idx) => (
           <TouchableOpacity
             key={item.id}
-            className={`py-4 px-4 flex-row justify-between items-center ${
-              idx < ajustes.length - 1 ? "border-b border-gray-100" : ""
-            }`}
+            style={[styles.listItem, idx < ajustes.length - 1 && styles.divider]}
             onPress={item.onPress}
           >
-            <View className="flex-row items-center gap-3">
+            <View style={styles.listLeft}>
               <Ionicons name={item.icon as any} size={22} color="#E94057" />
-              <Text className="text-base text-gray-800">{item.label}</Text>
+              <Text style={styles.listLabel}>{item.label}</Text>
             </View>
             <Ionicons name="chevron-forward" size={20} color="#bbb" />
           </TouchableOpacity>
@@ -95,7 +92,7 @@ export default function ProfileScreen() {
       </View>
 
       <TouchableOpacity
-        className="self-center mt-4 p-2 px-3"
+        style={styles.logoutBtn}
         onPress={() =>
           Alert.alert("Sair", "Você realmente deseja sair?", [
             { text: "Cancelar", style: "cancel" },
@@ -103,10 +100,81 @@ export default function ProfileScreen() {
           ])
         }
       >
-        <Text className="text-primary font-bold">Sair</Text>
+        <Text style={styles.logoutText}>Sair</Text>
       </TouchableOpacity>
     </SafeAreaView>
   );
 }
 
+const PINK = "#E94057";
 
+const styles = StyleSheet.create({
+  container: { flex: 1, backgroundColor: "#fff", padding: 16 },
+  header: { flexDirection: "row", alignItems: "center", marginBottom: 16, gap: 12 },
+  avatar: {
+    width: 44,
+    height: 44,
+    borderRadius: 22,
+    backgroundColor: "#fde7ed",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  name: { fontSize: 18, fontWeight: "700", color: "#222" },
+  subtitle: { fontSize: 12, color: "#777", marginTop: 2 },
+
+  pointsCard: {
+    backgroundColor: "#fff",
+    borderRadius: 16,
+    borderWidth: 1,
+    borderColor: "#f8bbd0",
+    padding: 16,
+    marginBottom: 18,
+    alignItems: "center",
+  },
+  pointsValue: { fontSize: 28, fontWeight: "800", color: PINK, letterSpacing: 0.5 },
+  pointsLabel: { color: "#444", marginBottom: 8 },
+  tierPill: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 6,
+    backgroundColor: PINK,
+    paddingVertical: 4,
+    paddingHorizontal: 10,
+    borderRadius: 999,
+    marginBottom: 12,
+  },
+  tierText: { color: "#fff", fontWeight: "700", fontSize: 12 },
+  progressTrack: {
+    width: "100%",
+    height: 6,
+    backgroundColor: "#f1f1f1",
+    borderRadius: 999,
+    overflow: "hidden",
+    marginTop: 2,
+  },
+  progressFill: { height: "100%", backgroundColor: PINK, borderRadius: 999 },
+  progressHint: { marginTop: 8, fontSize: 12, color: "#777" },
+
+  sectionTitle: { fontSize: 14, fontWeight: "700", color: "#333", marginTop: 8, marginBottom: 8 },
+  listCard: {
+    backgroundColor: "#fff",
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: "#eee",
+    overflow: "hidden",
+    marginBottom: 12,
+  },
+  listItem: {
+    paddingVertical: 14,
+    paddingHorizontal: 14,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  divider: { borderBottomWidth: 1, borderBottomColor: "#f3f3f3" },
+  listLeft: { flexDirection: "row", alignItems: "center", gap: 10 },
+  listLabel: { fontSize: 15, color: "#222" },
+
+  logoutBtn: { alignSelf: "center", marginTop: 14, padding: 8, paddingHorizontal: 12 },
+  logoutText: { color: PINK, fontWeight: "700" },
+});
