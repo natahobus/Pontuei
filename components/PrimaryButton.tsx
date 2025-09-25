@@ -1,17 +1,31 @@
 import React from "react";
-import { TouchableOpacity, Text } from "react-native";
-import tw from "twrnc";
+import { TouchableOpacity, Text, StyleSheet } from "react-native";
+import theme from "../theme";
 
 type Props = {
   title: string;
   onPress: () => void;
-  className?: string;
 };
 
-export default function PrimaryButton({ title, onPress, className }: Props) {
+export default function PrimaryButton({ title, onPress }: Props) {
   return (
-    <TouchableOpacity style={tw`bg-red-500 py-3 px-5 rounded-xl items-center ${className || ""}`} onPress={onPress}>
-      <Text style={tw`text-white text-base font-medium`}>{title}</Text>
+    <TouchableOpacity style={styles.button} onPress={onPress}>
+      <Text style={styles.text}>{title}</Text>
     </TouchableOpacity>
   );
 }
+
+const styles = StyleSheet.create({
+  button: {
+    backgroundColor: theme.colors.primary,
+    paddingVertical: 12,
+    paddingHorizontal: 20,
+    borderRadius: 10,
+    alignItems: "center",
+  },
+  text: {
+    color: "#fff",
+    fontSize: 16,
+    fontFamily: theme.fonts.medium,
+  },
+});

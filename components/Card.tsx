@@ -1,16 +1,29 @@
 // components/Card.tsx
-import { View, ViewProps } from "react-native";
+import { View, StyleSheet, ViewProps } from "react-native";
 import { ReactNode } from "react";
-import tw from "twrnc";
 
 export default function Card({
   children,
-  className,
+  style,
   ...rest
-}: { children: ReactNode; className?: string } & ViewProps) {
+}: { children: ReactNode } & ViewProps) {
   return (
-    <View style={tw`bg-white rounded-2xl p-4 shadow-sm mb-3 ${className || ""}`} {...rest}>
+    <View style={[styles.card, style]} {...rest}>
       {children}
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  card: {
+    backgroundColor: "#fff",
+    borderRadius: 16,
+    padding: 16,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 6,
+    elevation: 3,
+    marginBottom: 12,
+  },
+});

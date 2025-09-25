@@ -1,9 +1,8 @@
 // components/CartIcon.tsx
 import React from "react";
-import { View, Text } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useCart } from "../context/CartContext";
-import tw from "twrnc";
 
 type Props = {
   color?: string;
@@ -15,11 +14,24 @@ export default function CartIcon({ color = "#000", size = 24 }: Props) {
   const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
 
   return (
-    <View style={tw`pr-3`}>
+    <View style={{ paddingRight: 12 }}>
       <Ionicons name="cart-outline" size={size} color={color} />
       {totalItems > 0 && (
-        <View style={tw`absolute -top-1 right-1 bg-red-500 rounded-full min-w-[18px] h-[18px] justify-center items-center px-1`}>
-          <Text style={tw`text-white text-xs font-bold`}>
+        <View
+          style={{
+            position: "absolute",
+            right: 4,
+            top: -4,
+            backgroundColor: "#E94057",
+            borderRadius: 12,
+            minWidth: 18,
+            height: 18,
+            justifyContent: "center",
+            alignItems: "center",
+            paddingHorizontal: 4,
+          }}
+        >
+          <Text style={{ color: "#fff", fontSize: 11, fontWeight: "bold" }}>
             {totalItems}
           </Text>
         </View>
