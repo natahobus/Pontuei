@@ -1,9 +1,9 @@
 // app/_layout.tsx  
-import "../global.css";
 import { Stack, Link } from "expo-router";
 import { Pressable } from "react-native";
 import { CartProvider } from "../context/CartContext";
 import CartIcon from "../components/CartIcon";
+import tw from "twrnc";
 
 export default function RootLayout() {
   return (
@@ -17,7 +17,7 @@ export default function RootLayout() {
             title: "Loja",
             headerRight: () => (
               <Link href="/cart" asChild>
-                <Pressable className="mr-3">
+                <Pressable style={tw`mr-3`}>
                   <CartIcon color="#000" size={24} />
                 </Pressable>
               </Link>

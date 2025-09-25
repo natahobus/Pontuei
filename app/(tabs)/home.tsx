@@ -14,6 +14,7 @@ import { useRouter } from "expo-router";
 import ScreenContainer from "../../components/ScreenContainer";
 import Card from "../../components/Card";
 import { Ionicons } from "@expo/vector-icons";
+import tw from "twrnc";
 
 const { width } = Dimensions.get("window");
 
@@ -49,24 +50,24 @@ const HomeScreen = () => {
     <ScreenContainer>
       <ScrollView showsVerticalScrollIndicator={false}>
         {/* Logo e boas-vindas */}
-        <Text className="text-xl font-bold text-primary mb-2 text-center">pontuei.</Text>
-        <Text className="text-base text-text mb-5">
+        <Text style={tw`text-xl font-bold text-red-500 mb-2 text-center`}>pontuei.</Text>
+        <Text style={tw`text-base text-gray-800 mb-5`}>
           Bem-vindo de volta,{"\n"}
-          <Text className="font-bold">Natã Kuhn!</Text>
+          <Text style={tw`font-bold`}>Natã Kuhn!</Text>
         </Text>
 
         {/* Barra de busca */}
         <TextInput
-          className="bg-gray-100 p-3 rounded-xl mb-6"
+          style={tw`bg-gray-100 p-3 rounded-xl mb-6`}
           placeholder="Pesquise por lojas, cafeterias e mais"
           placeholderTextColor="#999"
         />
 
         {/* Últimos visitados */}
-        <View className="mb-6">
-          <View className="flex-row justify-between mb-3">
-            <Text className="text-base font-semibold text-text">Últimos estabelecimentos</Text>
-            <Text className="text-sm text-primary">ver mais</Text>
+        <View style={tw`mb-6`}>
+          <View style={tw`flex-row justify-between mb-3`}>
+            <Text style={tw`text-base font-semibold text-gray-800`}>Últimos estabelecimentos</Text>
+            <Text style={tw`text-sm text-red-500`}>ver mais</Text>
           </View>
           <FlatList
             data={ultimos}
@@ -76,8 +77,8 @@ const HomeScreen = () => {
             renderItem={({ item }) => (
               <TouchableOpacity onPress={() => router.push(`/store/${item.id}`)}>
                 <Card className="mr-3 items-center p-2 w-25">
-                  <Image source={{ uri: item.img }} className="w-20 h-20 rounded-xl mb-2 bg-gray-200" />
-                  <Text className="text-xs text-text text-center">{item.nome}</Text>
+                  <Image source={{ uri: item.img }} style={tw`w-20 h-20 rounded-xl mb-2 bg-gray-200`} />
+                  <Text style={tw`text-xs text-gray-800 text-center`}>{item.nome}</Text>
                 </Card>
               </TouchableOpacity>
             )}
@@ -85,7 +86,7 @@ const HomeScreen = () => {
         </View>
 
         {/* Carrossel de avisos */}
-        <View className="mb-6">
+        <View style={tw`mb-6`}>
           <FlatList
             data={avisos}
             horizontal
@@ -94,25 +95,25 @@ const HomeScreen = () => {
             keyExtractor={(item) => item.id}
             renderItem={({ item }) => (
               <Card className="justify-center items-center mr-3" style={{ width: width - 60, height: 120, backgroundColor: item.cor }}>
-                <Text className="text-base font-semibold text-text text-center">{item.titulo}</Text>
+                <Text style={tw`text-base font-semibold text-gray-800 text-center`}>{item.titulo}</Text>
               </Card>
             )}
           />
         </View>
 
         {/* Serviços */}
-        <Text className="text-base font-semibold text-text">Serviços</Text>
-        <View className="flex-row flex-wrap justify-between mb-6">
+        <Text style={tw`text-base font-semibold text-gray-800`}>Serviços</Text>
+        <View style={tw`flex-row flex-wrap justify-between mb-6`}>
           {servicos.map((s) => (
-            <TouchableOpacity key={s.id} className="w-[48%] h-25 bg-gray-50 rounded-xl justify-center items-center mb-3">
+            <TouchableOpacity key={s.id} style={tw`w-[48%] h-25 bg-gray-50 rounded-xl justify-center items-center mb-3`}>
               <Ionicons name={s.icon as any} size={24} color="#E94057" />
-              <Text className="text-text font-medium mt-2">{s.nome}</Text>
+              <Text style={tw`text-gray-800 font-medium mt-2`}>{s.nome}</Text>
             </TouchableOpacity>
           ))}
         </View>
 
         {/* Lojas próximas */}
-        <Text className="text-base font-semibold text-text">Lojas próximas de você</Text>
+        <Text style={tw`text-base font-semibold text-gray-800`}>Lojas próximas de você</Text>
         <FlatList
           data={lojasProximas}
           horizontal
@@ -121,8 +122,8 @@ const HomeScreen = () => {
           renderItem={({ item }) => (
             <TouchableOpacity onPress={() => router.push(`/store/${item.id}`)}>
               <Card className="w-40 h-35 mr-3 items-center p-2">
-                <Image source={{ uri: item.img }} className="w-full h-24 rounded-xl mb-2 bg-gray-200" />
-                <Text className="text-xs text-text text-center">{item.nome}</Text>
+                <Image source={{ uri: item.img }} style={tw`w-full h-24 rounded-xl mb-2 bg-gray-200`} />
+                <Text style={tw`text-xs text-gray-800 text-center`}>{item.nome}</Text>
               </Card>
             </TouchableOpacity>
           )}
