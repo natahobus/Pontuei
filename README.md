@@ -1,30 +1,20 @@
-# 🛍️ App de Loja com Pontos
+# Pontuei
 
-Aplicativo feito em **React Native** com **Expo Router**.  
-Ele simula um sistema de **lojas, carrinho de compras e pontos de fidelidade**.
+## Instalação de Dependências
 
----
-
-## 🚀 Funcionalidades
-- Listar lojas e produtos
-- Adicionar e remover itens do carrinho
-- Calcular total em **reais** e **pontos**
-- Perfil do usuário (mock)
-
----
-
-## 🛠️ Tecnologias
-- React Native
-- Expo Router
-- Context API
-- Expo Vector Icons
-
----
-
-## ▶️ Como rodar
 ```bash
+# Clone o repositório
+git clone https://github.com/natahobus/Pontuei
+
+# Entre no diretório
+cd Pontuei
+
 # Instale as dependências
 npm install
+```
+```bash
+# Inicializa o expo
+npm expo start
+```
 
-# Inicie o app
-npx expo start
+
